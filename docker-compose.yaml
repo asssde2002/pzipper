@@ -3,27 +3,21 @@ services:
     image: postgres:16
     volumes:
       - db_data:/var/lib/postgresql/data
-    ports:
-      - 7432:7432
+      - ./docker/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
     environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_NAME=pzipper_db
 
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./docker/Dockerfile
+    working_dir: /code
     volumes:
       - .:/code
     ports:
       - "8000:8000"
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=7432
-    command: sh run_web.sh
+    command: sh ./docker/run_web.sh
     depends_on:
       - db
 

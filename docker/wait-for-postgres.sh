@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -e
-  
 HOST=$1
 PORT=$2
 
