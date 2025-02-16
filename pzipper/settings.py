@@ -12,9 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from utils import get_config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+CONFIG = get_config(PROJECT_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -77,12 +82,12 @@ WSGI_APPLICATION = "pzipper.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db',
-        'PORT': 7432,
+        'ENGINE': CONFIG["databases"]["ENGINE"],
+        'NAME': CONFIG["databases"]["NAME"],
+        'USER': CONFIG["databases"]["USER"],
+        'PASSWORD': CONFIG["databases"]["PASSWORD"],
+        'HOST': CONFIG["databases"]["HOST"],
+        'PORT': CONFIG["databases"]["PORT"],
     }
 }
 

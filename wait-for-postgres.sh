@@ -3,7 +3,7 @@
 set -e
   
 HOST=$1
-PORT=$POSTGRES_PORT
+PORT=$2
 
 while ! pg_isready -h $HOST -p $PORT
 do

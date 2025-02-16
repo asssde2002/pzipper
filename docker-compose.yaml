@@ -1,15 +1,14 @@
 services:
   db:
-    image: postgres
+    image: postgres:16
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     ports:
       - 7432:7432
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    command: -p 7432
 
   web:
     build:
@@ -18,7 +17,7 @@ services:
     volumes:
       - .:/code
     ports:
-      - "8008:8008"
+      - "8000:8000"
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -27,3 +26,6 @@ services:
     command: sh run_web.sh
     depends_on:
       - db
+
+volumes:
+  db_data: {}
