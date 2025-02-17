@@ -20,14 +20,13 @@ services:
     depends_on:
       - db
 
-  # hardhat:
-  #   build:
-  #     context: ./hardhat
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./hardhat:/app
-  #   ports:
-  #     - "8545:8545"
+  hardhat:
+    build:
+      context: ./hardhat
+      dockerfile: Dockerfile
+    ports:
+      - "8545:8545"
+    command: npx hardhat node
 
 volumes:
   db_data: {}
