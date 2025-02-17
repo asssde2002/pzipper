@@ -6,15 +6,14 @@ services:
       - ./backend/docker/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
     environment:
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_NAME=pzipper_db
 
   web:
     build:
-      context: .
-      dockerfile: ./backend/docker/Dockerfile
-    working_dir: /code
+      context: ./backend
+      dockerfile: ./docker/Dockerfile
+    working_dir: /app
     volumes:
-      - ./backend:/code
+      - ./backend:/app
     ports:
       - "8000:8000"
     command: sh ./docker/run_web.sh
@@ -25,11 +24,10 @@ services:
   #   build:
   #     context: ./hardhat
   #     dockerfile: Dockerfile
-  #   container_name: hardhat_node
+  #   volumes:
+  #     - ./hardhat:/app
   #   ports:
   #     - "8545:8545"
-  #   networks:
-  #     - app_network
 
 volumes:
   db_data: {}
