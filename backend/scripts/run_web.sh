@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sh ./docker/wait-for-postgres.sh db 5432
+sh ./scripts/wait-for-postgres.sh db 5432
 
 pip install -r requirements.txt
 
