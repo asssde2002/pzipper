@@ -10,7 +10,7 @@ def contract_upload_to(instance, filename):
 
 class SmartContract(models.Model):
     contract_file = models.FileField(storage=ContractStorage, upload_to=contract_upload_to)
-    contract_name = models.TextField(unique=True, db_index=True)
+    contract_name = models.TextField(unique=True)
     contract_abi = models.JSONField(default=list)
     contract_bytecode = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -56,7 +56,12 @@ class SmartContract(models.Model):
 
 class SmartContractDeployment(models.Model):
     smart_contract = models.ForeignKey("blockchain.SmartContract", on_delete=models.CASCADE)
-    address = models.CharField(max_length=42, unique=True, db_index=True)
-    transaction_hash = models.CharField(max_length=66, unique=True, db_index=True)
+    address = models.CharField(max_length=42, unique=True)
+    transaction_hash = models.CharField(max_length=66, unique=True)
     deployed_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=["smart_contract", "deployed_at"]),
+        ]
 

@@ -411,7 +411,7 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 --
 
 COPY public.blockchain_smartcontract (id, contract_file, contract_name, contract_abi, contract_bytecode, created_at) FROM stdin;
-1	Counter.sol	Counter	[{"type": "constructor", "inputs": [], "stateMutability": "nonpayable"}, {"name": "count", "type": "function", "inputs": [], "outputs": [{"name": "", "type": "uint256", "internalType": "uint256"}], "stateMutability": "view"}, {"name": "increment", "type": "function", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}]	"608060405234801561001057600080fd5b5060008081905550610164806100276000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806306661abd1461003b578063d09de08a14610059575b600080fd5b610043610063565b6040516100509190610091565b60405180910390f35b610061610069565b005b60005481565b60008081548092919061007b906100b6565b9190505550565b61008b816100ac565b82525050565b60006020820190506100a66000830184610082565b92915050565b6000819050919050565b60006100c1826100ac565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8214156100f4576100f36100ff565b5b600182019050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fdfea2646970667358221220d38c6af2bd36c3e056212bb1a21606419b2f1d41b6719e114b351670347307e164736f6c63430008000033"	2025-02-18 19:37:28.958781+00
+1	Counter.sol	Counter	[{"type": "constructor", "inputs": [], "stateMutability": "nonpayable"}, {"name": "count", "type": "function", "inputs": [], "outputs": [{"name": "", "type": "uint256", "internalType": "uint256"}], "stateMutability": "view"}, {"name": "increment", "type": "function", "inputs": [], "outputs": [], "stateMutability": "nonpayable"}]	"608060405234801561001057600080fd5b5060008081905550610164806100276000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806306661abd1461003b578063d09de08a14610059575b600080fd5b610043610063565b6040516100509190610091565b60405180910390f35b610061610069565b005b60005481565b60008081548092919061007b906100b6565b9190505550565b61008b816100ac565b82525050565b60006020820190506100a66000830184610082565b92915050565b6000819050919050565b60006100c1826100ac565b91507fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8214156100f4576100f36100ff565b5b600182019050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fdfea2646970667358221220d38c6af2bd36c3e056212bb1a21606419b2f1d41b6719e114b351670347307e164736f6c63430008000033"	2025-02-18 20:35:41.613114+00
 \.
 
 
@@ -444,25 +444,25 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2025-02-18 19:37:09.581452+00
-2	auth	0001_initial	2025-02-18 19:37:09.612096+00
-3	admin	0001_initial	2025-02-18 19:37:09.619932+00
-4	admin	0002_logentry_remove_auto_add	2025-02-18 19:37:09.622925+00
-5	admin	0003_logentry_add_action_flag_choices	2025-02-18 19:37:09.626383+00
-6	contenttypes	0002_remove_content_type_name	2025-02-18 19:37:09.634631+00
-7	auth	0002_alter_permission_name_max_length	2025-02-18 19:37:09.637764+00
-8	auth	0003_alter_user_email_max_length	2025-02-18 19:37:09.640983+00
-9	auth	0004_alter_user_username_opts	2025-02-18 19:37:09.643757+00
-10	auth	0005_alter_user_last_login_null	2025-02-18 19:37:09.646883+00
-11	auth	0006_require_contenttypes_0002	2025-02-18 19:37:09.647249+00
-12	auth	0007_alter_validators_add_error_messages	2025-02-18 19:37:09.649994+00
-13	auth	0008_alter_user_username_max_length	2025-02-18 19:37:09.654389+00
-14	auth	0009_alter_user_last_name_max_length	2025-02-18 19:37:09.657452+00
-15	auth	0010_alter_group_name_max_length	2025-02-18 19:37:09.660805+00
-16	auth	0011_update_proxy_permissions	2025-02-18 19:37:09.663516+00
-17	auth	0012_alter_user_first_name_max_length	2025-02-18 19:37:09.666631+00
-18	blockchain	0001_initial	2025-02-18 19:37:09.680703+00
-19	sessions	0001_initial	2025-02-18 19:37:09.68508+00
+1	contenttypes	0001_initial	2025-02-18 20:35:36.435159+00
+2	auth	0001_initial	2025-02-18 20:35:36.461241+00
+3	admin	0001_initial	2025-02-18 20:35:36.468854+00
+4	admin	0002_logentry_remove_auto_add	2025-02-18 20:35:36.471813+00
+5	admin	0003_logentry_add_action_flag_choices	2025-02-18 20:35:36.474783+00
+6	contenttypes	0002_remove_content_type_name	2025-02-18 20:35:36.482438+00
+7	auth	0002_alter_permission_name_max_length	2025-02-18 20:35:36.485309+00
+8	auth	0003_alter_user_email_max_length	2025-02-18 20:35:36.488265+00
+9	auth	0004_alter_user_username_opts	2025-02-18 20:35:36.490816+00
+10	auth	0005_alter_user_last_login_null	2025-02-18 20:35:36.493747+00
+11	auth	0006_require_contenttypes_0002	2025-02-18 20:35:36.494164+00
+12	auth	0007_alter_validators_add_error_messages	2025-02-18 20:35:36.497393+00
+13	auth	0008_alter_user_username_max_length	2025-02-18 20:35:36.502222+00
+14	auth	0009_alter_user_last_name_max_length	2025-02-18 20:35:36.505242+00
+15	auth	0010_alter_group_name_max_length	2025-02-18 20:35:36.50854+00
+16	auth	0011_update_proxy_permissions	2025-02-18 20:35:36.511136+00
+17	auth	0012_alter_user_first_name_max_length	2025-02-18 20:35:36.514123+00
+18	blockchain	0001_initial	2025-02-18 20:35:36.525576+00
+19	sessions	0001_initial	2025-02-18 20:35:36.529463+00
 \.
 
 
@@ -780,6 +780,13 @@ CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_use
 --
 
 CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: blockchain__smart_c_40b1e4_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX blockchain__smart_c_40b1e4_idx ON public.blockchain_smartcontractdeployment USING btree (smart_contract_id, deployed_at);
 
 
 --
