@@ -1,5 +1,6 @@
 from rest_framework import status as DRF_status
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from utils.exceptions import UserError, MissingInputError, AlreadyExistError
 from rest_framework.response import Response
 
 from functools import wraps
@@ -16,6 +17,12 @@ def DRF_response(func):
                 payload, status = payload
 
             response["PAYLOAD"] = payload
+        except (UserError, MissingInputError, AlreadyExistError) as e:
+            response = {
+                "SUCCESS": False,
+                "ERR_MSG": e.get_err_msg(),
+            }
+            status = DRF_status.HTTP_400_BAD_REQUEST
 
         except ObjectDoesNotExist as e:
             msg = str(e)
