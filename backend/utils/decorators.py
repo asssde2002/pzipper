@@ -45,7 +45,7 @@ def DRF_response(func):
                 "SUCCESS": False,
                 "ERR_MSG": e.get_err_msg(),
             }
-            status = DRF_status.HTTP_500_INTERNAL_SERVER_ERRORs
+            status = DRF_status.HTTP_500_INTERNAL_SERVER_ERROR
 
         return Response(response, status=status)
 

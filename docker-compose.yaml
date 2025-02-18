@@ -28,8 +28,6 @@ services:
     build:
       context: ./hardhat
       dockerfile: Dockerfile
-    ports:
-      - "8545:8545"
     command: npx hardhat node
 
 volumes:
