@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 class SmartContractViewSet(viewsets.GenericViewSet):
-    queryset = SmartContract.objects.all()
+    queryset = SmartContract.objects.all().order_by("-created_at")
     serializer_class = SmartContractSerializer
 
     @DRF_response
@@ -24,6 +24,11 @@ class SmartContractViewSet(viewsets.GenericViewSet):
         
         serializer = self.get_serializer(smart_contract)
         return serializer.data, DRF_status.HTTP_201_CREATED
+    
+    @DRF_response
+    def list(self, request):
+        serializer = self.get_serializer(self.queryset, many=True)
+        return serializer.data
     
 
 class SmartContractDeploymentViewSet(viewsets.GenericViewSet):

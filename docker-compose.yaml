@@ -1,9 +1,10 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:15
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./backend/scripts/initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+      - ./backend/db:/db:cached
     environment:
       - POSTGRES_PASSWORD=postgres
 
