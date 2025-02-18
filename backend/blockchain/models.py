@@ -11,31 +11,37 @@ def contract_upload_to(instance, filename):
 class SmartContract(models.Model):
     contract_file = models.FileField(storage=ContractStorage, upload_to=contract_upload_to)
     contract_name = models.TextField(unique=True, db_index=True)
+    contract_abi = models.JSONField(default=list)
+    contract_bytecode = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @staticmethod
+    def get_contract_interface(file):
+        solc_version = settings.BLOCKCHAIN_SOLIDITY_VERSION
+        if solc_version not in solcx.get_installed_solc_versions():
+            solcx.install_solc(solc_version)
+
+        contract_source_code = ""
+        for chunk in file.chunks():
+            contract_source_code += chunk.decode("utf-8")
+
+        compiled_sol = solcx.compile_source(
+            contract_source_code, output_values=["abi", "bin"], solc_version=solc_version
+        )
+        contract_interface = next(iter(compiled_sol.values()))
+
+        return contract_interface
 
     def deploy(self):
         w3 = Web3(Web3.HTTPProvider(settings.BLOCKCHAIN_URL))
         deployer_account = w3.eth.account.from_key(settings.BLOCKCHAIN_ACCOUNT_PRIVATE_KEY)
         deployer_account_address = deployer_account.address
 
-        solc_version = settings.BLOCKCHAIN_SOLIDITY_VERSION
-        if solc_version not in solcx.get_installed_solc_versions():
-            solcx.install_solc(solc_version)
-
-        solcx.set_solc_version(solc_version)
-
-        with open(self.contract_file.path, "r") as file:
-            contract_source_code = file.read()
-
-        compiled_sol = solcx.compile_source(
-            contract_source_code, output_values=["abi", "bin"], solc_version=solc_version
-        )
-        contract_interface = next(iter(compiled_sol.values()))
-        contract_abi = contract_interface["abi"]
-        contract_bytecode = contract_interface["bin"]
-
-        contract = w3.eth.contract(abi=contract_abi, bytecode=contract_bytecode)
-        tx_hash = contract.constructor().transact({"from": deployer_account_address})
+        contract = w3.eth.contract(abi=self.contract_abi, bytecode=self.contract_bytecode)
+        tx_hash = contract.constructor().transact({
+            "from": deployer_account_address,
+            "gas_price": w3.eth.gas_price,
+        })
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
         contract_address = tx_receipt.contractAddress
 

@@ -1,11 +1,12 @@
 from blockchain.models import SmartContract, SmartContractDeployment
 from blockchain.serializers import SmartContractSerializer, SmartContractDeploymentSerializer
+from blockchain.controllers import CounterSmartContractController
 
 from rest_framework import viewsets, status as DRF_status
 from utils.decorators import DRF_response
 from utils.exceptions import MissingInputError, AlreadyExistError, UserError, InternalServerError
 from pathlib import Path
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from web3 import Web3
 from django.conf import settings
 
@@ -29,7 +30,13 @@ class SmartContractViewSet(viewsets.GenericViewSet):
             raise MissingInputError("no file")
         
         file_name = Path(data_file.name).stem 
-        smart_contract, is_created = SmartContract.objects.get_or_create(contract_name=file_name, defaults={"contract_file": data_file})
+        contract_interface = SmartContract.get_contract_interface(data_file)
+        defaults = {
+            "contract_abi": contract_interface["abi"],
+            "contract_bytecode": contract_interface["bin"],
+            "contract_file": data_file,
+        }
+        smart_contract, is_created = SmartContract.objects.get_or_create(contract_name=file_name, defaults=defaults)
         if not is_created:
             raise AlreadyExistError(f"file name ({file_name})")
         
@@ -68,4 +75,26 @@ class SmartContractDeploymentViewSet(viewsets.GenericViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return serializer.data
 
+
+class CounterSmartContractViewSet(viewsets.GenericViewSet):
+    CONTRACT_NAME = "Counter"
+    queryset = SmartContractDeployment.objects.select_related("smart_contract").filter(smart_contract__contract_name=CONTRACT_NAME).order_by('-deployed_at')
+    serializer_class = SmartContractSerializer
+    controller_class = CounterSmartContractController
+
+    @action(detail=False, methods=["post"], url_path="increase-count")
+    @DRF_response
+    def increase_count(self, request):
+        deployment = self.queryset.first()
+        controller = self.controller_class(deployment)
+        controller.increase_count()
+        
+    
+    @action(detail=False, methods=["get"], url_path="get-count")
+    @DRF_response
+    def get_count(self, request):
+        deployment = self.queryset.first()
+        controller = self.controller_class(deployment)
+        curr_count = controller.get_count()
+        return {"current_count": curr_count}
     
