@@ -1,6 +1,6 @@
 from rest_framework import status as DRF_status
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
-from utils.exceptions import UserError, MissingInputError, AlreadyExistError
+from utils.exceptions import UserError, MissingInputError, AlreadyExistError, InternalServerError
 from rest_framework.response import Response
 
 from functools import wraps
@@ -39,6 +39,13 @@ def DRF_response(func):
                 "ERR_MSG": f"Permission Denied Error: {msg}",
             }
             status = DRF_status.HTTP_403_FORBIDDEN
+
+        except InternalServerError as e:
+            response = {
+                "SUCCESS": False,
+                "ERR_MSG": e.get_err_msg(),
+            }
+            status = DRF_status.HTTP_500_INTERNAL_SERVER_ERRORs
 
         return Response(response, status=status)
 

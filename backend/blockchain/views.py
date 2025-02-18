@@ -3,8 +3,19 @@ from blockchain.serializers import SmartContractSerializer, SmartContractDeploym
 
 from rest_framework import viewsets, status as DRF_status
 from utils.decorators import DRF_response
-from utils.exceptions import MissingInputError, AlreadyExistError, UserError
+from utils.exceptions import MissingInputError, AlreadyExistError, UserError, InternalServerError
 from pathlib import Path
+from rest_framework.decorators import api_view
+from web3 import Web3
+from django.conf import settings
+
+
+@api_view(["GET"])
+@DRF_response
+def ping_hardhat(request):
+    w3 = Web3(Web3.HTTPProvider(settings.BLOCKCHAIN_URL))
+    if not w3.is_connected():
+        raise InternalServerError("Hardhat node does not start")
 
 
 class SmartContractViewSet(viewsets.GenericViewSet):

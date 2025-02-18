@@ -22,3 +22,6 @@ class MissingInputError(BasicException):
 
 class AlreadyExistError(BasicException):
     GENERAL_MESSAGE = "Already Exist Error"
+
+class InternalServerError(BasicException):
+    GENERAL_MESSAGE = "Internal Server Error"
