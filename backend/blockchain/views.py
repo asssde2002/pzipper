@@ -3,7 +3,7 @@ from blockchain.serializers import SmartContractSerializer, SmartContractDeploym
 
 from rest_framework import viewsets, status as DRF_status
 from utils.decorators import DRF_response
-from utils.exceptions import MissingInputError, AlreadyExistError
+from utils.exceptions import MissingInputError, AlreadyExistError, UserError
 from pathlib import Path
 
 
@@ -32,13 +32,24 @@ class SmartContractDeploymentViewSet(viewsets.GenericViewSet):
 
     @DRF_response
     def create(self, request):
-        ...
+        request_data = request.data
+        contract_id = request_data.get("contract_id")
+        smart_contract = SmartContract.objects.get(id=contract_id)
+        try:
+            deployment = smart_contract.deploy()
+            serializer = self.get_serializer(deployment)
+            return serializer.data, DRF_status.HTTP_201_CREATED
+        except Exception:
+            raise UserError(f"smart contract({contract_id}) deployed failed")
 
     @DRF_response
     def list(self, request):
-        ...
+        contract_id = request.query_params.get("contract_id")
+        if not contract_id:
+            raise MissingInputError("contract_id is necessary")
+        
+        queryset = self.queryset.select_related("smart_contract").filter(smart_contract_id=contract_id)
+        serializer = self.get_serializer(queryset, many=True)
+        return serializer.data
 
-    @DRF_response
-    def retrieve(self, request):
-        ...
     

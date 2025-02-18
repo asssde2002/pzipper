@@ -5,3 +5,5 @@ psycopg2-binary==2.9.10 ; platform_machine == "aarch64"
 whitenoise==6.9.0
 web3==7.8.0
 ipython==8.32.0
+py-solc-x==2.0.3
+

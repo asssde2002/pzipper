@@ -83,12 +83,12 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': CONFIG["databases"]["ENGINE"],
-        'NAME': CONFIG["databases"]["NAME"],
-        'USER': CONFIG["databases"]["USER"],
-        'PASSWORD': CONFIG["databases"]["PASSWORD"],
-        'HOST': CONFIG["databases"]["HOST"],
-        'PORT': CONFIG["databases"]["PORT"],
+        'ENGINE': CONFIG["DATABASES"]["ENGINE"],
+        'NAME': CONFIG["DATABASES"]["NAME"],
+        'USER': CONFIG["DATABASES"]["USER"],
+        'PASSWORD': CONFIG["DATABASES"]["PASSWORD"],
+        'HOST': CONFIG["DATABASES"]["HOST"],
+        'PORT': CONFIG["DATABASES"]["PORT"],
     }
 }
 
@@ -149,3 +149,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+
+BLOCKCHAIN_PROTOCOL = CONFIG["BLOCKCHAIN"].get("PROTOCOL", "http") 
+BLOCKCHAIN_URL = f'{BLOCKCHAIN_PROTOCOL}://{CONFIG["BLOCKCHAIN"]["HOST"]}:{CONFIG["BLOCKCHAIN"]["PORT"]}'
+BLOCKCHAIN_SOLIDITY_VERSION = CONFIG["BLOCKCHAIN"]["SOLIDITY_VERSION"]
+BLOCKCHAIN_ACCOUNT_PRIVATE_KEY = CONFIG["BLOCKCHAIN"]["ACCOUNT_PRIVATE_KEY"]

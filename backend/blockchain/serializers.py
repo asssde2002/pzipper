@@ -9,11 +9,12 @@ class SmartContractSerializer(serializers.ModelSerializer):
 
 
 class SmartContractDeploymentSerializer(serializers.ModelSerializer):
+    contract_id = serializers.IntegerField(source="smart_contract_id")
     contract_name = serializers.SerializerMethodField()
 
     def get_contract_name(self, obj):
         return obj.smart_contract.contract_name
-
+    
     class Meta:
         model = SmartContractDeployment
-        fields = ["contract_name", "address", "deployed_at"]
+        fields = ["contract_id", "contract_name", "address", "deployed_at"]
