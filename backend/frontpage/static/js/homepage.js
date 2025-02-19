@@ -2,7 +2,8 @@ async function startHardhatServer() {
     try {
         let response = await fetch('/blockchain/ping-hardhat/');
         let data = await response.json();
-        document.getElementById("hardhat-response").innerText = data.message || "Hardhat Server is ready!";
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
+        document.getElementById("hardhat-response").innerText = data["PAYLOAD"] || "Hardhat Server is ready!";
     } catch (error) {
         console.error("Error pinging Hardhat:", error);
         document.getElementById("hardhat-response").innerText = "Failed to reach Hardhat.";
@@ -17,6 +18,7 @@ async function increaseCount() {
         });
 
         let data = await response.json();
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         alert("Count increased successfully!");
     } catch (error) {
         alert("Fail to increase count.");
@@ -29,7 +31,7 @@ async function getCount() {
             method: "GET",
         });
         let data = await response.json();
-        console.log(data)
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         alert(`Current count: ${data["PAYLOAD"]["current_count"]}`);
     } catch (error) {
         alert("Fail to get count.");
@@ -50,9 +52,10 @@ async function uploadSmartContract() {
         });
 
         let data = await response.json();
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         if (response.ok) {
             alert("Contract uploaded successfully!");
-            getSmartContract(); // **上傳成功後，刷新所有 Smart Contract**
+            getSmartContract();
         } else {
             alert(`Upload failed: ${data.error || "Unknown error"}`);
         }
@@ -64,7 +67,7 @@ async function uploadSmartContract() {
 
 async function deploySmartContract(contractID, buttonElement) {
     try {
-        buttonElement.disabled = true; // 避免重複點擊
+        buttonElement.disabled = true;
         buttonElement.innerText = "Deploying...";
 
         let response = await fetch('/blockchain/deploy/', {
@@ -74,9 +77,10 @@ async function deploySmartContract(contractID, buttonElement) {
         });
 
         let data = await response.json();
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         if (response.ok) {
             alert(`Contract deployed successfully!`);
-            getContractDeployment(contractID); // **只更新該合約的部署狀態**
+            getContractDeployment(contractID); 
         } else {
             alert(`Deployment failed: ${data.error || "Unknown error"}`);
         }
@@ -95,9 +99,9 @@ async function getSmartContract() {
         let response = await fetch('/blockchain/smart-contract/', { method: "GET" });
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         
-        let response_json = await response.json();
-        if (!response_json["SUCCESS"]) throw new Error(`HTTP error! Status: ${response_json["ERR_MSG"]}`);
-        contracts = response_json["PAYLOAD"]
+        let data = await response.json();
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
+        contracts = data["PAYLOAD"]
         console.log("Contracts Fetched:", contracts);
         renderContracts(contracts);
     } catch (error) {
@@ -110,6 +114,7 @@ async function getContractDeployment(contractID) {
     try {
         const response = await fetch(`/blockchain/deploy/?contract_id=${contractID}`);
         const data = await response.json();
+        if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         let deployment_data = data["PAYLOAD"]
 
         let deploymentTable = document.getElementById(`deployment-${contractID}`);
