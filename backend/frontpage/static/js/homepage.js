@@ -2,10 +2,10 @@ async function startHardhatServer() {
     try {
         let response = await fetch('/blockchain/ping-hardhat/');
         let data = await response.json();
-        document.getElementById("response").innerText = data.message || "Hardhat Server is ready!";
+        document.getElementById("hardhat-response").innerText = data.message || "Hardhat Server is ready!";
     } catch (error) {
         console.error("Error pinging Hardhat:", error);
-        document.getElementById("response").innerText = "Failed to reach Hardhat.";
+        document.getElementById("hardhat-response").innerText = "Failed to reach Hardhat.";
     }
 }
 
@@ -39,7 +39,7 @@ async function getCount() {
 async function uploadSmartContract() {
     const fileInput = document.getElementById("contractFile");
     const file = fileInput.files[0];
-    
+
     let formData = new FormData();
     formData.append("data", file);
 

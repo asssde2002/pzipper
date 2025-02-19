@@ -73,9 +73,10 @@ input[type="file"] {
 }
 
 /* Response message style */
-#response {
+#hardhat-response {
     font-size: 1.2em;
     color: #333;
+    text-align: center;
     margin-top: 10px;
 }
 
