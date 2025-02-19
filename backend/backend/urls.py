@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from frontpage.views import HomePage
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("blockchain/", include("blockchain.urls"))
+    path("blockchain/", include("blockchain.urls")),
+    path("", HomePage.as_view()),
 ]

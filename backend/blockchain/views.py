@@ -45,7 +45,8 @@ class SmartContractViewSet(viewsets.GenericViewSet):
     
     @DRF_response
     def list(self, request):
-        serializer = self.get_serializer(self.queryset, many=True)
+        queryset = self.queryset.all()
+        serializer = self.get_serializer(queryset, many=True)
         return serializer.data
     
 

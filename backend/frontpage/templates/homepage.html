@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contract Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+</head>
+<body>
+    <h1>Smart Contract Dashboard</h1>
+
+    <div id="hardhatServer">
+        <button onclick="startHardhatServer()">Start Hardhat</button>
+        <p id="response"></p>
+    </div>
+
+    <div id="uploadContract">
+        <input type="file" id="contractFile">
+        <button onclick="uploadSmartContract()">Upload</button>
+    </div>
+
+    <div id="contractList"></div>
+    <script src="{% static 'js/homepage.js' %}"></script>
+</body>
+</html>

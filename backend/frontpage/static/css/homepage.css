@@ -1,0 +1,208 @@
+/* General body styles */
+body {
+    font-family: "Courier New", monospace;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the entire page */
+.container {
+    font-family: "Courier New", monospace;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+h1 {
+    font-family: "Courier New", monospace;
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+/* Section styles for Hardhat server and contract upload */
+#hardhatServer, #uploadContract {
+    font-family: "Courier New", monospace;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Style for buttons in both sections */
+button {
+    background-color: #4CAF50;
+    font-family: "Courier New", monospace;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px auto;
+    width: 60%; /* Full-width buttons */
+    display: block;
+}
+
+/* Hover effect for buttons */
+button:hover:enabled {
+    background-color: #45a049;
+}
+
+/* Style for input fields */
+input[type="file"] {
+    font-family: "Courier New", monospace;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    font-size: 1em;
+}
+
+/* Style for file input */
+#contractFile {
+    font-family: "Courier New", monospace;
+    margin-bottom: 20px;
+}
+
+/* Response message style */
+#response {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Contract list container */
+#contractList {
+    margin-top: 40px;
+}
+
+/* Style for contract containers */
+.contract-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Flexbox for contract header (contract name + buttons) */
+.contract-header {
+    font-family: "Courier New", monospace;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Contract name (h2) */
+.contract-header h2 {
+    font-family: "Courier New", monospace;
+    font-size: 1.6em;
+    margin: 0;
+    color: #333;
+}
+
+/* Buttons in the contract header */
+.contract-header button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 100px;
+}
+
+/* Hover effect for contract buttons */
+.contract-header button:hover:enabled {
+    background-color: #45a049;
+}
+
+/* Disabled state for buttons */
+.contract-header button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Table styles for contract deployment info */
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+/* Style for table headers */
+th {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style for table cells */
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    text-align: center;
+}
+
+/* Style for the "No deployments" message */
+td[colspan="2"] {
+    text-align: center;
+    color: #aaa;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    button {
+        font-size: 1.2em;
+        padding: 10px 15px;
+    }
+
+    input[type="file"] {
+        font-size: 1.2em;
+    }
+
+    /* Adjust sections for mobile */
+    #hardhatServer, #uploadContract {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .contract-header h2 {
+        font-size: 1.4em;
+    }
+
+    .contract-container {
+        padding: 15px;
+    }
+
+    .contract-header button {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+}
