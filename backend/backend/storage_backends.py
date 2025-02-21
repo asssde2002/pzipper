@@ -1,6 +1,8 @@
-from django.core.files.storage import FileSystemStorage
-from django.conf import settings
 import os
+
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
 
 class ContractStorage(FileSystemStorage):
     def __init__(self, *args, **kwargs):
