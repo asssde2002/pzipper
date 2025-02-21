@@ -9,4 +9,5 @@ py-solc-x==2.0.3
 django-redis==5.4.0
 redis==5.2.1
 cachetools==5.5.2
-
+ruff==0.9.7
+isort==6.0.0

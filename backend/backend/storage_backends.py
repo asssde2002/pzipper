@@ -5,4 +5,4 @@ import os
 class ContractStorage(FileSystemStorage):
     def __init__(self, *args, **kwargs):
         contract_location = os.path.join(settings.BASE_DIR, "blockchain/contracts")
-        super().__init__(location=contract_location, *args, **kwargs)
+        super().__init__(*args, location=contract_location, **kwargs)
