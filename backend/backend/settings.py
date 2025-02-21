@@ -166,6 +166,20 @@ TEMPLATES = [
     },
 ]
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": CONFIG["CACHE"]["CACHE_LOCATION"],
+        "OPTIONS": {
+            "CLIENT_CLASS": CONFIG["CACHE"]["DEFAULT_CLIENT_CLASS"],
+            "CONNECTION_POOL_CLASS_KWARGS": {
+                "health_check_interval": 10,
+                "socket_keepalive": True,
+            }
+        }
+    },
+}
+
 BLOCKCHAIN_PROTOCOL = CONFIG["BLOCKCHAIN"].get("PROTOCOL", "http") 
 BLOCKCHAIN_URL = f'{BLOCKCHAIN_PROTOCOL}://{CONFIG["BLOCKCHAIN"]["HOST"]}:{CONFIG["BLOCKCHAIN"]["PORT"]}'
 BLOCKCHAIN_SOLIDITY_VERSION = CONFIG["BLOCKCHAIN"]["SOLIDITY_VERSION"]

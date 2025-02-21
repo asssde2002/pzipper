@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from backend.storage_backends import ContractStorage
 from web3 import Web3
+from cachetools import cached
+from utils.decorators import RedisTTLCache
 import solcx
 
 
@@ -51,6 +53,7 @@ class SmartContract(models.Model):
             "transaction_hash": f"0x{tx_hash.hex()}",
         }
         deployment = SmartContractDeployment.objects.create(**deployment_data)
+        
         return deployment
         
 
@@ -64,4 +67,11 @@ class SmartContractDeployment(models.Model):
         indexes = [
             models.Index(fields=["smart_contract", "deployed_at"]),
         ]
+    
+    @staticmethod
+    @cached(RedisTTLCache("sc-deployment", timeout=300))
+    def get_latest_deployment(contract_name):
+        queryset = SmartContractDeployment.objects.select_related("smart_contract").filter(smart_contract__contract_name=contract_name).order_by('-deployed_at')
+        return queryset.first()
+
 

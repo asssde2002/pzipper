@@ -23,12 +23,16 @@ services:
     depends_on:
       - db
       - hardhat
+      - redis
 
   hardhat:
     build:
       context: ./hardhat
       dockerfile: Dockerfile
     command: npx hardhat node
+  
+  redis:
+    image: redis:7.4
 
 volumes:
   db_data: {}
