@@ -86,7 +86,7 @@ class CounterSmartContractViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["post"], url_path="increase-count")
     @DRF_response
     def increase_count(self, request):
-        deployment = self.queryset.first()
+        deployment = SmartContractDeployment.get_latest_deployment(self.CONTRACT_NAME)
         controller = self.controller_class(deployment)
         controller.increase_count()
         
@@ -94,7 +94,7 @@ class CounterSmartContractViewSet(viewsets.GenericViewSet):
     @action(detail=False, methods=["get"], url_path="get-count")
     @DRF_response
     def get_count(self, request):
-        deployment = self.queryset.first()
+        deployment = SmartContractDeployment.get_latest_deployment(self.CONTRACT_NAME)
         controller = self.controller_class(deployment)
         curr_count = controller.get_count()
         return {"current_count": curr_count}
