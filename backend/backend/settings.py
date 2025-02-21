@@ -82,13 +82,13 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': CONFIG["DATABASES"]["ENGINE"],
-        'NAME': CONFIG["DATABASES"]["NAME"],
-        'USER': CONFIG["DATABASES"]["USER"],
-        'PASSWORD': CONFIG["DATABASES"]["PASSWORD"],
-        'HOST': CONFIG["DATABASES"]["HOST"],
-        'PORT': CONFIG["DATABASES"]["PORT"],
+    "default": {
+        "ENGINE": CONFIG["DATABASES"]["ENGINE"],
+        "NAME": CONFIG["DATABASES"]["NAME"],
+        "USER": CONFIG["DATABASES"]["USER"],
+        "PASSWORD": CONFIG["DATABASES"]["PASSWORD"],
+        "HOST": CONFIG["DATABASES"]["HOST"],
+        "PORT": CONFIG["DATABASES"]["PORT"],
     }
 }
 
@@ -128,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontpage/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontpage/static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -175,12 +175,12 @@ CACHES = {
             "CONNECTION_POOL_CLASS_KWARGS": {
                 "health_check_interval": 10,
                 "socket_keepalive": True,
-            }
-        }
+            },
+        },
     },
 }
 
 BLOCKCHAIN_PROTOCOL = CONFIG["BLOCKCHAIN"].get("PROTOCOL", "http")
-BLOCKCHAIN_URL = f'{BLOCKCHAIN_PROTOCOL}://{CONFIG["BLOCKCHAIN"]["HOST"]}:{CONFIG["BLOCKCHAIN"]["PORT"]}'
+BLOCKCHAIN_URL = f"{BLOCKCHAIN_PROTOCOL}://{CONFIG['BLOCKCHAIN']['HOST']}:{CONFIG['BLOCKCHAIN']['PORT']}"
 BLOCKCHAIN_SOLIDITY_VERSION = CONFIG["BLOCKCHAIN"]["SOLIDITY_VERSION"]
 BLOCKCHAIN_ACCOUNT_PRIVATE_KEY = CONFIG["BLOCKCHAIN"]["ACCOUNT_PRIVATE_KEY"]
