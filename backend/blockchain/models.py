@@ -4,6 +4,7 @@ from backend.storage_backends import ContractStorage
 from web3 import Web3
 from cachetools import cached
 from utils.decorators import RedisTTLCache
+from utils.exceptions import UserError
 import solcx
 
 
@@ -45,8 +46,10 @@ class SmartContract(models.Model):
             "gas_price": w3.eth.gas_price,
         })
         tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        contract_address = tx_receipt.contractAddress
+        if tx_receipt["status"] == "0":
+            raise UserError("Transaction failed")
 
+        contract_address = tx_receipt.contractAddress
         deployment_data = {
             "smart_contract": self,
             "address": contract_address,

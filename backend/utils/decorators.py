@@ -1,6 +1,6 @@
 from rest_framework import status as DRF_status
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
-from utils.exceptions import UserError, MissingInputError, AlreadyExistError, InternalServerError
+from utils.exceptions import UserError, MissingInputError, AlreadyExistError, InternalServerError, GeneralError
 from rest_framework.response import Response
 from django.core.cache import caches
 import re
@@ -19,7 +19,7 @@ def DRF_response(func):
                 payload, status = payload
 
             response["PAYLOAD"] = payload
-        except (UserError, MissingInputError, AlreadyExistError) as e:
+        except (UserError, MissingInputError, AlreadyExistError, GeneralError) as e:
             response = {
                 "SUCCESS": False,
                 "ERR_MSG": e.get_err_msg(),
