@@ -7,9 +7,9 @@ urlpatterns = [
 ]
 
 router = DefaultRouter()
-router.register(r"smart-contract", SmartContractViewSet, basename="smartcontract")
-router.register(r"deploy", SmartContractDeploymentViewSet, basename="smartcontractdeployment")
-router.register(r"smart-contract-counter", CounterSmartContractViewSet, basename="smartcontractcounter")
+router.register(r"smartcontract", SmartContractViewSet, basename="smartcontract")
+router.register(r"deployment", SmartContractDeploymentViewSet, basename="smartcontractdeployment")
+router.register(r"smartcontract-counter", CounterSmartContractViewSet, basename="smartcontractcounter")
 
 urlpatterns += router.urls
 

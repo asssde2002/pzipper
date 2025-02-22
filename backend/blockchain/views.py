@@ -58,6 +58,9 @@ class SmartContractDeploymentViewSet(viewsets.GenericViewSet):
     def create(self, request):
         request_data = request.data
         contract_id = request_data.get("contract_id")
+        if not contract_id:
+            raise MissingInputError("contract_id is necessary")
+        
         smart_contract = SmartContract.objects.get(id=contract_id)
         try:
             deployment = smart_contract.deploy()

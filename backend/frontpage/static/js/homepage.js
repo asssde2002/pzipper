@@ -12,7 +12,7 @@ async function startHardhatServer() {
 
 async function increaseCount() {
     try {
-        let response = await fetch('blockchain/smart-contract-counter/increase-count/', {
+        let response = await fetch('blockchain/smartcontract-counter/increase-count/', {
             method: "POST",
             headers: { "Content-Type": "application/json" }
         });
@@ -27,7 +27,7 @@ async function increaseCount() {
 
 async function getCount() {
     try {
-        let response = await fetch('blockchain/smart-contract-counter/get-count/', {
+        let response = await fetch('blockchain/smartcontract-counter/get-count/', {
             method: "GET",
         });
         let data = await response.json();
@@ -46,7 +46,7 @@ async function uploadSmartContract() {
     formData.append("data", file);
 
     try {
-        let response = await fetch('/blockchain/smart-contract/', {
+        let response = await fetch('/blockchain/smartcontract/', {
             method: "POST",
             body: formData
         });
@@ -70,7 +70,7 @@ async function deploySmartContract(contractID, buttonElement) {
         buttonElement.disabled = true;
         buttonElement.innerText = "Deploying...";
 
-        let response = await fetch('/blockchain/deploy/', {
+        let response = await fetch('/blockchain/deployment/', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ contract_id: contractID })
@@ -96,7 +96,7 @@ async function deploySmartContract(contractID, buttonElement) {
 
 async function getSmartContract() {
     try {
-        let response = await fetch('/blockchain/smart-contract/', { method: "GET" });
+        let response = await fetch('/blockchain/smartcontract/', { method: "GET" });
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         
         let data = await response.json();
@@ -112,7 +112,7 @@ async function getSmartContract() {
 
 async function getContractDeployment(contractID) {
     try {
-        const response = await fetch(`/blockchain/deploy/?contract_id=${contractID}`);
+        const response = await fetch(`/blockchain/deployment/?contract_id=${contractID}`);
         const data = await response.json();
         if (!data["SUCCESS"]) throw new Error(`HTTP error! error: ${data["ERR_MSG"]}`);
         let deployment_data = data["PAYLOAD"]
