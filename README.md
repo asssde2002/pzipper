@@ -7,7 +7,7 @@
 
 ### Database Schema
 ![Database Schema](database_schema.png)
-```mermaid
+<!-- ```mermaid
 erDiagram
     SMARTCONTRACT {
         BIGINT id PK
@@ -21,13 +21,13 @@ erDiagram
     SMARTCONTRACTDEPLOYMENT {
         BIGINT id PK
         BIGINT smart_contract_id FK
-        TEXT address "UNIQUE"
-        TEXT transaction_hash "UNIQUE"
+        VARCHAR(42) address "UNIQUE"
+        VARCHAR(66) transaction_hash "UNIQUE"
         TIMEZONETZ deployed_at
     }
 
     SMARTCONTRACT ||--o{ SMARTCONTRACTDEPLOYMENT : "1 to N"
-```
+``` -->
 ### How to start the services
 1. `docker-compose build --no-cahce`
 2. `docker-compose up`
