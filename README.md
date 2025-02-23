@@ -66,10 +66,9 @@ erDiagram
         * Upload a new smart contract.
     * **Query Parameters**: null  
     * **Request Body**:
-        | Parameter | Type  | Required | Description                     |
-        |-----------|-------|----------|---------------------------------|
+        | Parameter | Type  | Required | Description                        |
+        |-----------|-------|----------|------------------------------------|
         | data      | file  | Yes      | The smart contract file to upload. |
-
     * **Response**:
         - **201 Created**:
             ```json
@@ -121,9 +120,8 @@ erDiagram
     * **Query Parameters**: null  
     * **Request Body**:
         | Parameter    | Type   | Required | Description                        |
-        |-------------|--------|----------|------------------------------------|
-        | contract_id | int    | Yes      | The ID of the smart contract.     |
-
+        |--------------|--------|----------|------------------------------------|
+        | contract_id  | int    | Yes      | The ID of the smart contract.      |
     * **Response**:
         - **201 Created**:
             ```json
@@ -147,8 +145,8 @@ erDiagram
         * Retrieve all deployments for a specific smart contract.
     * **Query Parameters**:
         | Parameter    | Type   | Required | Description                        |
-        |-------------|--------|----------|------------------------------------|
-        | contract_id | int    | Yes      | The ID of the smart contract.     |
+        |--------------|--------|----------|------------------------------------|
+        | contract_id  | int    | Yes      | The ID of the smart contract.      |
     * **Request Body**: null
     * **Response**:
         - **200 OK**:
@@ -171,7 +169,7 @@ erDiagram
                 ]
             }
             ```
-        - **400 Bad Request**
+        - **400 Bad Request**:
             ```json
             {
                 "SUCCESS": false,
