@@ -7,6 +7,7 @@ This project provides an API for managing smart contracts deployed on a blockcha
     * I created an independent Hardhat node container instead of running the Hardhat node as a subprocess in the web server, as I wanted to keep them decoupled.
     * PostgreSQL was used for its reliability, JSON field support, and scalability. Since most of the fields were structured, I believed using an RDBMS was the better choice.
     * Redis cache was used for its speed and efficiency.
+    * Django REST framework (DRF) was used to provide a standardized API interface, simplifying development, enabling automatic serialization, and ensuring consistency across endpoints.
     * Ruff and isort were used for linting and formatting.
     
 * Future Improvements
