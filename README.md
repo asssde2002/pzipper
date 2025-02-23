@@ -132,7 +132,7 @@ erDiagram
                 "deployed_at": "2025-02-22T12:00:00.000000Z"
             }
             ```
-        - **400 Bad Request**
+        - **400 Bad Request**:
             ```json
             {
                 "SUCCESS": false,
