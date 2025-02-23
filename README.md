@@ -1,6 +1,25 @@
-# PZIPPER Assignment
+# pZipper Assignment
+
+### Overview
+This project provides an API for managing smart contracts deployed on a blockchain using Hardhat. It includes features for uploading, deploying, and interacting with deployed smart contracts.
+
+* Backend Design Choices
+    * I created an independent Hardhat node container instead of running the Hardhat node as a subprocess in the web server, as I wanted to keep them decoupled.
+    * PostgreSQL was used for its reliability, JSON field support, and scalability. Since most of the fields were structured, I believed using an RDBMS was the better choice.
+    * Redis cache was used for its speed and efficiency.
+    * Ruff and isort were used for linting and formatting.
+    
+* Future Improvements
+    * Add authentication and role-based access control.
+    * Make smart contract deployment asynchronous by integrating RabbitMQ and Celery.
+    * Add test cases.
+    * Improve error handling and logging.
+
 ### User Interface
 ![UI Preview](ui.png)
+* Note:
+    * If you want to test the upload function, another smart contract is located at `/hardhat/contracts/Lock.sol`.
+    * A smart contract with the same file name can only be uploaded once.
 
 ### Architecture
 ![Architecture](architecture.png)
@@ -28,6 +47,9 @@ erDiagram
 
     SMARTCONTRACT ||--o{ SMARTCONTRACTDEPLOYMENT : "1 to N"
 ``` -->
+* Note:
+    * The contract file will be saved in the `/backend/blockchain/contracts/` folder.
+
 ### How to start the services
 1. `docker-compose build --no-cahce`
 2. `docker-compose up`
